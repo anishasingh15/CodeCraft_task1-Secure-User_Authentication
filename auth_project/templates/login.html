@@ -1,0 +1,80 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="auth-card">
+
+    <h2 class="title">Welcome Back</h2>
+
+    {% if messages %}
+        {% for message in messages %}
+            <div class="alert alert-success">
+                {{ message }}
+            </div>
+        {% endfor %}
+    {% endif %}
+
+    <form method="POST">
+        {% csrf_token %}
+
+        <!-- Username -->
+        <div class="mb-3">
+            <input
+                type="text"
+                name="username"
+                class="form-control"
+                placeholder="Enter Username"
+                required
+            >
+        </div>
+
+        <!-- Password -->
+        <div class="mb-3 position-relative">
+            <input
+                type="password"
+                name="password"
+                id="id_password"
+                class="form-control pe-5"
+                placeholder="Enter Password"
+                required
+            >
+
+            <i
+                id="togglePassword"
+                class="bi bi-eye-slash position-absolute"
+                style="top:50%; right:15px; transform:translateY(-50%); cursor:pointer;">
+            </i>
+        </div>
+
+        <button type="submit" class="btn btn-custom w-100 text-white">
+            Login
+        </button>
+    </form>
+
+    <div class="footer-text mt-3">
+        New User?
+        <a href="/register/">Create Account</a>
+    </div>
+
+</div>
+
+<script>
+const passwordField = document.getElementById("id_password");
+const togglePassword = document.getElementById("togglePassword");
+
+togglePassword.addEventListener("click", function () {
+
+    if (passwordField.type === "password") {
+        passwordField.type = "text";
+        this.classList.remove("bi-eye-slash");
+        this.classList.add("bi-eye");
+    } else {
+        passwordField.type = "password";
+        this.classList.remove("bi-eye");
+        this.classList.add("bi-eye-slash");
+    }
+
+});
+</script>
+
+{% endblock %}

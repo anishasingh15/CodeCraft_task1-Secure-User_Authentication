@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="auth-card text-center">
+
+    <h2>🎉 Welcome {{ user.username }}</h2>
+
+    <hr>
+
+    <p>
+        You have successfully logged in.
+    </p>
+
+    <p>
+        <strong>Email:</strong> {{ user.email }}
+    </p>
+
+    <a href="/logout/" class="btn btn-danger w-100">
+        Logout
+    </a>
+
+</div>
+
+{% endblock %}

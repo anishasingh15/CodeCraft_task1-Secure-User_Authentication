@@ -1,0 +1,72 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="auth-card">
+
+    <h2 class="title">Create Account</h2>
+
+    <form method="POST">
+
+        {% csrf_token %}
+
+        <div class="mb-3">
+            {{ form.username }}
+        </div>
+
+        <div class="mb-3">
+            {{ form.email }}
+        </div>
+
+        <div class="mb-3 position-relative">
+            {{ form.password1 }}
+            <i class="bi bi-eye-slash position-absolute"
+               id="togglePassword1"
+               style="top:50%; right:15px; transform:translateY(-50%); cursor:pointer;">
+            </i>
+        </div>
+
+        <div class="mb-3 position-relative">
+            {{ form.password2 }}
+            <i class="bi bi-eye-slash position-absolute"
+               id="togglePassword2"
+               style="top:50%; right:15px; transform:translateY(-50%); cursor:pointer;">
+            </i>
+        </div>
+
+        <button type="submit" class="btn btn-custom w-100">
+            Register
+        </button>
+
+    </form>
+
+    <div class="footer-text mt-3">
+        Already have an account?
+        <a href="/">Login</a>
+    </div>
+
+</div>
+
+<script>
+function togglePassword(fieldId, iconId){
+    const field = document.getElementById(fieldId);
+    const icon = document.getElementById(iconId);
+
+    icon.addEventListener("click", function(){
+        if(field.type === "password"){
+            field.type = "text";
+            icon.classList.remove("bi-eye-slash");
+            icon.classList.add("bi-eye");
+        }else{
+            field.type = "password";
+            icon.classList.remove("bi-eye");
+            icon.classList.add("bi-eye-slash");
+        }
+    });
+}
+
+togglePassword("id_password1","togglePassword1");
+togglePassword("id_password2","togglePassword2");
+</script>
+
+{% endblock %}
